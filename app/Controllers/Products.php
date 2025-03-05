@@ -4,13 +4,28 @@ namespace App\Controllers;
 
 class Products extends BaseController{
 
-  public function index(){
-    echo "<h1>This is the index method in the Products controller.</h1>";
-    print_r($this->session);  
+  public function index(): string{
+
+    $data = ['title' => 'Products',
+      'id' => 12
+    ];
+    // return view('products/index', $data);
+    return view('templates/header')
+      .view('products/index', $data)
+      .view('templates/footer');
+
   }
 
   public function show($id) : string{
-    return "<h1>Details of the product $id </h1>";
+    
+    $data = ['title' => 'Products',
+      'id' => $id
+    ];
+
+    // return view('products/index', $data);
+    return view('templates/header')
+      .view('products/show', $data)
+      .view('templates/footer');
   }
 
   public function cat($categoria, $id) : string{
