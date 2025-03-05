@@ -1,7 +1,6 @@
+<?php $this->extend('templates/layout'); ?>
 
-<h1>
-  <?php echo esc($title); ?> // esc is a function that escapes the code html
-</h1>
+<?php $this->section('content'); ?>
 <table>
   <thead>
     <tr>
@@ -14,3 +13,11 @@
 
   </tbody>
 </table>
+
+<?php $this->endSection(); ?>
+
+<?php $this->section('scripts'); ?>
+  <script>
+    alert('Hello JS');
+  </script>
+<?php $this->endSection(); ?>

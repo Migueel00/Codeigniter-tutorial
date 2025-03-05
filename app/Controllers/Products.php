@@ -10,10 +10,11 @@ class Products extends BaseController{
       'id' => 12
     ];
     // return view('products/index', $data);
-    return view('templates/header')
-      .view('products/index', $data)
-      .view('templates/footer');
+    // return view('templates/header')
+    //   .view('products/index', $data)
+    //   .view('templates/footer');
 
+    return view('products/index', $data);
   }
 
   public function show($id) : string{
@@ -23,9 +24,11 @@ class Products extends BaseController{
     ];
 
     // return view('products/index', $data);
-    return view('templates/header')
-      .view('products/show', $data)
-      .view('templates/footer');
+    // return view('templates/header')
+    //   .view('products/show', $data)
+    //   .view('templates/footer');
+
+    return view('products/show', $data);
   }
 
   public function cat($categoria, $id) : string{
