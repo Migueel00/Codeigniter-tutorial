@@ -13,13 +13,43 @@ class Products extends BaseController{
   }
 
   public function index(): string{
-/*     $db = \Config\Database::connect(); // conection to database
+    $db = \Config\Database::connect(); // conection to database
 
-    $query = $db->query('SELECT * FROM products');
-    $result = $query->getResult(); // resturn the result in object */
+    $condition = ['status' => 1, 'stock >' => 5];
 
-    $productsModel = new ProductsModel();
-    $result = $productsModel->findAll();  // return all data with deleteSoftMode true return all the values without delete_at info 
+    // query builder
+  /*   $query = $db->table('products')
+    ->select('id, code, name, stock')
+    ->where($condition)
+    ->orderBy('name', 'asc')
+    ->limit(1)
+    ->get();
+ */
+    $sql = $db->table('products');
+    $sql->select('products.id, products.code, products.name, products.stock, storage.name AS storage');
+    $sql->join('storage', 'products.id_storage = storage.id'); // inner join 
+
+    $query = $sql->get();
+    $result = $query->getResult();
+    echo $db->getLastQuery();
+
+
+    //$result = $query->getResult(); // resturn the result in object 
+
+    // $productsModel = new ProductsModel();
+    // $result = $productsModel->findAll();  // return all data with deleteSoftMode true return all the values without delete_at info 
+
+    $data = ['title' => 'Products',
+      'id' => 12,
+      'products' => $result
+    ];
+
+    return view('products/index', $data);
+  }
+
+  public function indexFiltered() : string{
+    
+    $result = $this->productsModel->where('status', 1)->findAll(); 
 
     $data = ['title' => 'Products',
       'id' => 12,

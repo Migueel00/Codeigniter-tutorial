@@ -13,6 +13,7 @@ $routes->get('/products/transaction', 'Products::transaction'); // only call to 
 $routes->get('/products/update', 'Products::update'); // only call to a function
 $routes->get('/products/delete', 'Products::delete'); // only call to a function
 
+$routes->get('/productsFiltered', 'Products::indexFiltered');
 
 
 $routes->view('productsList/(:alpha)', 'list_products'); // This is a view route

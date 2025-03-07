@@ -7,6 +7,7 @@
       <th>Code</th>
       <th>Name</th>
       <th>Stock</th>
+      <th>Storage</th>
     </tr>
   </thead>
   <tbody>
@@ -15,6 +16,7 @@
         <td> <?php echo $product->code ?> </td>
         <td> <?php echo $product->name ?> </td>
         <td> <?php echo $product->stock ?> </td>
+        <td> <?php echo $product->storage ?> </td>
       </tr>
     <?php endforeach; ?>
   </tbody>
