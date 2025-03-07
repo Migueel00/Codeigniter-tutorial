@@ -5,14 +5,15 @@ namespace App\Controllers;
 class Products extends BaseController{
 
   public function index(): string{
+    $db = \Config\Database::connect(); // conection to database
+
+    $query = $db->query('SELECT * FROM products');
+    $result = $query->getResult(); // resturn the result in object
 
     $data = ['title' => 'Products',
-      'id' => 12
+      'id' => 12,
+      'products' => $result
     ];
-    // return view('products/index', $data);
-    // return view('templates/header')
-    //   .view('products/index', $data)
-    //   .view('templates/footer');
 
     return view('products/index', $data);
   }
