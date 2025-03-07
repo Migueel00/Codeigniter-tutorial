@@ -10,9 +10,12 @@ class Products extends BaseController{
   public function __construct(){
     
     $this->productsModel = new ProductsModel();
+
   }
 
   public function index(): string{
+    helper('form'); // call helper
+
     $db = \Config\Database::connect(); // conection to database
 
     $condition = ['status' => 1, 'stock >' => 5];

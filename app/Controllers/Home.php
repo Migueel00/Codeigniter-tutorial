@@ -16,7 +16,10 @@ class Home extends BaseController
 
     public function index(): string{   
 
-        $this->callSeeder();
+        // $this->callSeeder();
+        helper('utils_helper'); // file name format important has to be name_helper
+
+        echo generateToken();
         return view('welcome_message');
     }
 
