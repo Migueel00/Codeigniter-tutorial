@@ -7,14 +7,16 @@ use Throwable;
 class Home extends BaseController
 {   
     private $migrate;
+    private $seeder;
 
     function __construct(){
         $this->migrate = \Config\Services::migrations();
+        $this->seeder = \Config\Database::seeder();
     }
 
     public function index(): string{   
 
-        $this->revertMigration();
+        $this->callSeeder();
         return view('welcome_message');
     }
 
@@ -36,5 +38,9 @@ class Home extends BaseController
         catch(Throwable $error){
             echo $error;
         }
+    }
+
+    private function callSeeder(){
+        $this->seeder->call('CategoriesSeeder');
     }
 }
