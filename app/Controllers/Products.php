@@ -128,4 +128,10 @@ class Products extends BaseController{
   public function deleteSoftDeleted() : void{
     $this->productsModel->purgeDeleted(); // delete all the softdeleteds fields
   }
+
+  public function add() : string{
+
+    helper('form');
+    return view('products/add');
+  }
 }
