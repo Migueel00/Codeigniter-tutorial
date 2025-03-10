@@ -41,3 +41,6 @@ $routes->put('storage/(:num)', 'Storage::update/$1'); // update mehtod PUT or PA
 $routes->delete('storage/(:num)', 'Storage::delete/$1'); // delete
  */
 $routes->resource('storage', ['controller' => 'Storage']); // this will create all the routes for the resource
+
+$routes->get('upload', 'Galery::index');
+$routes->post('upload', 'Galery::upload');
