@@ -30,3 +30,14 @@ $routes->group('admin', static function ($routes) { // this is a group route it 
     $routes->get('products/(:num)', 'Admin\Products::show/$1');
     $routes->get('products/(:alpha)/(:num)', 'Admin\Products::cat/$1/$2');
 });
+
+/* /// Restful routes
+$routes->get('storage/new', 'Storage::new'); // New
+$routes->post('storage', 'Storage::create'); // create
+$routes->get('storage', 'Storage::index'); // list
+$routes->get('storage/(:num)', 'Storage::show/$1'); // show
+$routes->get('storage/(:num)/edit', 'Storage::edit/$1'); // edit
+$routes->put('storage/(:num)', 'Storage::update/$1'); // update mehtod PUT or PATCH
+$routes->delete('storage/(:num)', 'Storage::delete/$1'); // delete
+ */
+$routes->resource('storage', ['controller' => 'Storage']); // this will create all the routes for the resource

@@ -7,4 +7,4 @@
   php spark make:model Storage --suffix --table storage --> add suffix and especify table 
   php spark make:controller Storage --restful --> Make controller with restfull methods
   php spark make:scaffold <Name> --> Make controller, model, migrations and seeders
-  
+  php spark routes --> show all the routes 
