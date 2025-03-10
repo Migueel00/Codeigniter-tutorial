@@ -6,6 +6,7 @@ use App\Models\ProductsModel;
 
 class Products extends BaseController{
   private $productsModel;
+  protected $helpers = ['form']; // call helper
 
   public function __construct(){
     
@@ -132,6 +133,35 @@ class Products extends BaseController{
   public function add() : string{
 
     helper('form');
-    return view('products/add');
+    $data = [
+      'title' => 'Add'
+    ];
+
+    return view('products/add', $data);
+  }
+
+  public function save(){
+    print_r($_POST);
+
+    $rules = [
+      'code' => [
+        'label' => 'code', 
+        'rules' => 'required|is_unique[products.code]',
+        'errors' => [
+          'required' => 'The {field} field is required.',
+          'is_unique' => 'The {field} field must be unique.'
+        ],
+      ],
+      'name' => 'required|min_length[3]',
+      'price' => 'required|numeric|greater_than[0]',
+      'stock' => 'required|numeric',
+      'storage' => 'required|is_not_unique[storage.id]'
+    ];
+
+    if(!$this->validate($rules)){
+      return redirect()->back()->withInput();
+    }
+
+    echo "Data saved";
   }
 }
