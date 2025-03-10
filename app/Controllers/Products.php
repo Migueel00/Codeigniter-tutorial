@@ -154,7 +154,13 @@ class Products extends BaseController{
       ],
       'name' => 'required|min_length[3]',
       'price' => 'required|numeric|greater_than[0]',
-      'stock' => 'required|numeric',
+      'stock' => [
+        'rules' => 'required|numeric|isEven',
+        'errors' => [
+          'numeric' => 'The {field} field must be a number.',
+          'isEven' => 'The {field} field must be an even number.'
+        ],
+      ],
       'storage' => 'required|is_not_unique[storage.id]'
     ];
 
@@ -163,5 +169,38 @@ class Products extends BaseController{
     }
 
     echo "Data saved";
+  }
+
+  public function edit($id) :string{
+
+    $product = $this->productsModel->find($id);
+    $data = [
+      'title' => 'Edit',
+      'product' => $product
+    ];
+
+    return view('products/edit', $data);
+  }
+
+  public function updateProduct($id) {
+    $rules = [
+      'code' => [
+        'label' => 'code', 
+        'rules' => 'required|is_unique[products.code,id,{id}]',
+        'errors' => [
+          'required' => 'The {field} field is required.',
+          'is_unique' => 'The {field} field must be unique.'
+        ],
+      ],
+      'name' => 'required|min_length[3]',
+      'price' => 'required|numeric|greater_than[0]',
+      'stock' => 'required|numeric',
+      'storage' => 'required|is_not_unique[storage.id]',
+      'id' => 'required'
+    ];
+
+    if(!$this->validate($rules)){
+      return redirect()->back()->withInput();
+    }
   }
 }

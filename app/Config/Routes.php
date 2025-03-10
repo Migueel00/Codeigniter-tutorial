@@ -8,6 +8,9 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 $routes->get('/products', 'Products::index');
 $routes->get('/products/add', 'Products::add');
+$routes->get('/products/(:num)/edit', 'Products::edit/$1');
+$routes->post('/products/edit/(:num)', 'Products::updateProduct/$1');
+
 $routes->post('/products/save', 'Products::save');
 
 
